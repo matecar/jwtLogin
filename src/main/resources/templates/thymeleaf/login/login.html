@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<div layout:fragment="content" class="login-body">
+    <img src="/image/logo.png" class="logo">
+    <form class="form" role="form" th:action="@{/user/login/email}" method="post" th:object="${emailLoginRequestDto}">
+        <div class="form-group">
+            <label class="h5" th:for="email">이메일 </label>
+            <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력하세요."
+                   th:class="${#fields.hasErrors('email')} ? 'form-control fieldError' : 'form-control'"/>
+            <p id="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">INPUT ERROR</p>
+        </div>
+        <div class="form-group">
+            <label class="h5" th:for="password">비밀번호 </label>
+            <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호를 입력하세요."
+                   th:class="${#fields.hasErrors('password')} ? 'form-control fieldError' : 'form-control'"/>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">INPUT ERROR</p>
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+</div>
+</html>
